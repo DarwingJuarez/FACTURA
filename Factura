@@ -1,0 +1,380 @@
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        int opcion_telefonia = 0, opcion_cable = 0, opcion_internet = 0, opcion_instalacion;
+        double subtotal = 0, total = 0, descuento = 0;
+        int combo_bronce = 0, combo_oro = 0, combo_platinum = 0;
+        string nombre = null, apellido = null, direccion = null, desc = null;
+        int numeroAl = 0;
+        int broncet = 0, orot = 0, platinumt = 0;
+        int broncec = 0, oroc = 0, platinumc = 0;
+        int broncei = 0, oroi = 0, platinumi = 0;
+        string respuesta = null, minuscula = null;
+        do
+        {
+            //generando numero aleatorio, para el codigo de factura
+            Random random = new Random();
+            numeroAl = random.Next(1, 99);
+
+            //Ingresando dados del usuario
+            Console.Clear();
+            Console.WriteLine("Ingrese su nombre: ");
+            nombre = Console.ReadLine();
+            Console.WriteLine("Ingrese su apellido: ");
+            apellido = Console.ReadLine();
+            Console.WriteLine("Ingrese su direccion: (24 caracteres)");
+            direccion = Console.ReadLine();
+            direccion = direccion[..23]; //->deja ingresar unicamente 24 caracteres
+            Console.Clear();
+            //cambiando el valor a 0 de todas las variables.
+            subtotal = 0; total = 0; descuento = 0;
+            broncet = 0; orot = 0; platinumt = 0;
+            broncec = 0; oroc = 0; platinumc = 0;
+            broncei = 0; oroi = 0; platinumi = 0;
+
+            Console.WriteLine("****MENU INICIAL****");
+            Console.WriteLine("1. Mensualidad");
+            Console.WriteLine("2. Instalacion y Equipo");
+            opcion_instalacion = int.Parse(Console.ReadLine());
+            Console.Clear();
+
+            Console.WriteLine("COMBOS CON DESCUENTO");
+            Console.WriteLine("COMBO\t\tDESCUENTO");
+            Console.WriteLine("2 planes bronce\t\t5%");
+            Console.WriteLine("2 planes oro\t\t7%");
+            Console.WriteLine("2 planes platinum\t10%\n");
+            Console.WriteLine("COMBO\t\tDESCUENTO");
+            Console.WriteLine("3 planes bronce\t\t6%");
+            Console.WriteLine("3 planes oro\t\t8%");
+            Console.WriteLine("3 planes platinum\t12%");
+            Console.WriteLine("Presione Enter para continuar");
+            Console.ReadKey();
+            Console.Clear();
+
+            subtotal = 0;
+            Console.WriteLine("******PLANES TELEFONIA******");
+            Console.WriteLine("1. Plan Bronce\t\tQ100");
+            Console.WriteLine("2. Plan Oro\t\tQ200");
+            Console.WriteLine("3. Plan Platinum\tQ300");
+            Console.Write("Elija su plan:");
+            opcion_telefonia = int.Parse(Console.ReadLine());
+            Console.Clear();
+
+            Console.WriteLine("********PLANES CABLE********");
+            Console.WriteLine("1. Plan Bronce\t\tQ150");
+            Console.WriteLine("2. Plan Oro\t\tQ250");
+            Console.WriteLine("3. Plan Platinum\tQ350");
+            Console.Write("Elija su plan:");
+            opcion_cable = int.Parse(Console.ReadLine());
+            Console.Clear();
+
+            Console.WriteLine("*******PLANES INTERNET******");
+            Console.WriteLine("1. Plan Bronce\t\tQ200");
+            Console.WriteLine("2. Plan Oro\t\tQ300");
+            Console.WriteLine("3. Plan Platinum\tQ400");
+            Console.Write("Elija su plan:");
+            opcion_internet = int.Parse(Console.ReadLine());
+            Console.Clear();
+            switch (opcion_instalacion)
+            {
+                case 1:
+                    //aumentado el valor segun la opcion elegida
+                    switch (opcion_telefonia)
+                    {
+                        case 1:
+                            broncet = 1;
+                            combo_bronce++;
+                            subtotal += 100;
+                            break;
+                        case 2:
+                            orot = 1;
+                            subtotal += 200;
+                            combo_oro++;
+                            break;
+                        case 3:
+                            platinumt = 1;
+                            subtotal += 300;
+                            combo_platinum++;
+                            break;
+                    }
+                    //aumentado el valor segun la opcion elegida
+                    switch (opcion_cable)
+                    {
+                        case 1:
+                            broncec = 1;
+                            subtotal += 150;
+                            combo_bronce++;
+                            break;
+                        case 2:
+                            oroc = 1;
+                            subtotal += 250;
+                            combo_oro++;
+                            break;
+                        case 3:
+                            platinumc = 1;
+                            subtotal += 350;
+                            combo_platinum++;
+                            break;
+                    }
+                    //aumentado el valor segun la opcion elegida
+                    switch (opcion_internet)
+                    {
+                        case 1:
+                            broncei = 1;
+                            subtotal += 200;
+                            combo_bronce++;
+                            break;
+                        case 2:
+                            oroi = 1;
+                            subtotal += 300;
+                            combo_oro++;
+                            break;
+                        case 3:
+                            platinumi = 1;
+                            subtotal += 400;
+                            combo_platinum++;
+                            break;
+                    }
+
+                    if (combo_bronce > 1 || combo_oro > 1 || combo_platinum > 1)
+                    {
+                        //descuento cuando se eligen 2 combos de: bronce, oro o platinum
+                        if (combo_bronce == 2)
+                        {
+                            desc = "5%";
+                            descuento = subtotal * 0.05;
+                            total = subtotal - descuento;
+                        }
+                        if (combo_oro == 2)
+                        {
+                            desc = "7%";
+                            descuento = subtotal * 0.07;
+                            total = subtotal - descuento;
+                        }
+                        if (combo_platinum == 2)
+                        {
+                            desc = "10%";
+                            descuento = subtotal * 0.10;
+                            total = subtotal - descuento;
+                        }
+                        //descuento cuando se eleigen 3 combos de: bronce oro o platinum.
+                        if (combo_bronce == 3)
+                        {
+                            desc = "6%";
+                            descuento = subtotal * 0.06;
+                            total = subtotal - descuento;
+                        }
+                        if (combo_oro == 3)
+                        {
+                            desc = "8%";
+                            descuento = subtotal * 0.08;
+                            total = subtotal - descuento;
+                        }
+                        if (combo_platinum == 3)
+                        {
+                            desc = "12%";
+                            descuento = subtotal * 0.12;
+                            total = subtotal - descuento;
+                        }
+
+                    }
+                    else
+                    {
+                        desc = "0%";
+                        descuento = 0;
+                        total = subtotal;
+                    }
+                    break;
+                case 2:
+                    total = 250;
+                    //aumentado el valor segun la opcion elegida
+                    switch (opcion_telefonia)
+                    {
+                        case 1:
+                            broncet = 1;
+                            combo_bronce++;
+                            subtotal += 100;
+                            break;
+                        case 2:
+                            orot = 1;
+                            subtotal += 200;
+                            combo_oro++;
+                            break;
+                        case 3:
+                            platinumt = 1;
+                            subtotal += 300;
+                            combo_platinum++;
+                            break;
+                    }
+                    //aumentado el valor segun la opcion elegida
+                    switch (opcion_cable)
+                    {
+                        case 1:
+                            broncec = 1;
+                            subtotal += 150;
+                            combo_bronce++;
+                            break;
+                        case 2:
+                            oroc = 1;
+                            subtotal += 250;
+                            combo_oro++;
+                            break;
+                        case 3:
+                            platinumc = 1;
+                            subtotal += 350;
+                            combo_platinum++;
+                            break;
+                    }
+                    //aumentado el valor segun la opcion elegida
+                    switch (opcion_internet)
+                    {
+                        case 1:
+                            broncei = 1;
+                            subtotal += 200;
+                            combo_bronce++;
+                            break;
+                        case 2:
+                            oroi = 1;
+                            subtotal += 300;
+                            combo_oro++;
+                            break;
+                        case 3:
+                            platinumi = 1;
+                            subtotal += 400;
+                            combo_platinum++;
+                            break;
+                    }
+
+                    if (combo_bronce > 1 || combo_oro > 1 || combo_platinum > 1)
+                    {
+                        //descuento cuando se eligen 2 combos de: bronce, oro o platinum
+                        if (combo_bronce == 2)
+                        {
+                            desc = "5%";
+                            descuento = subtotal * 0.05;
+                            total += (subtotal - descuento);
+                        }
+                        if (combo_oro == 2)
+                        {
+                            desc = "7%";
+                            descuento = subtotal * 0.07;
+                            total += (subtotal - descuento);
+                        }
+                        if (combo_platinum == 2)
+                        {
+                            desc = "10%";
+                            descuento = subtotal * 0.10;
+                            total += (subtotal - descuento);
+                        }
+                        //descuento cuando se eleigen 3 combos de: bronce oro o platinum.
+                        if (combo_bronce == 3)
+                        {
+                            desc = "6%";
+                            descuento = subtotal * 0.06;
+                            total += (subtotal - descuento);
+                        }
+                        if (combo_oro == 3)
+                        {
+                            desc = "8%";
+                            descuento = subtotal * 0.08;
+                            total += (subtotal - descuento);
+                        }
+                        if (combo_platinum == 3)
+                        {
+                            desc = "12%";
+                            descuento = subtotal * 0.12;
+                            total += (subtotal - descuento);
+                        }
+
+                    }
+                    else
+                    {
+                        desc = "0%";
+                        descuento = 0;
+                        total += subtotal;
+                    }
+                    break;
+            }
+            Console.Clear();
+            //Factura sin instalacion
+            if (opcion_instalacion == 1)
+            {
+                Console.WriteLine("--------------FACTURA---------------");
+                Console.WriteLine("------------------------------------");
+                Console.WriteLine("|Cod.\t\t\t\t" + numeroAl + " |");
+                Console.WriteLine("|\t\t\t\t   |");
+                Console.WriteLine("|" + nombre + " " + apellido + "\t\t\t   |");
+                Console.WriteLine("|" + direccion + "\t   |");
+                Console.WriteLine("|\t\t\t\t   |");
+                Console.WriteLine("|***************PLAN***************|");
+                Console.WriteLine("|¬¬¬¬¬¬¬¬¬¬¬¬TELEFONIA¬¬¬¬¬¬¬¬¬¬¬¬¬|");
+                Console.WriteLine("|Bronce:\t\t\t" + broncet + "  |");
+                Console.WriteLine("|Oro:\t\t\t\t" + orot + "  |");
+                Console.WriteLine("|Platinum:\t\t\t" + platinumt + "  |");
+                Console.WriteLine("|\t\t\t\t   |");
+                Console.WriteLine("|¬¬¬¬¬¬¬¬¬¬¬¬¬¬CABLE¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬|");
+                Console.WriteLine("|Bronce:\t\t\t" + broncec + "  |");
+                Console.WriteLine("|Oro:\t\t\t\t" + oroc + "  |");
+                Console.WriteLine("|Platinum:\t\t\t" + platinumc + "  |");
+                Console.WriteLine("|\t\t\t\t   |");
+                Console.WriteLine("|¬¬¬¬¬¬¬¬¬¬¬¬¬INTERNER¬¬¬¬¬¬¬¬¬¬¬¬¬|");
+                Console.WriteLine("|Bronce:\t\t\t" + broncei + "  |");
+                Console.WriteLine("|Oro:\t\t\t\t" + oroi + "  |");
+                Console.WriteLine("|Platinum:\t\t\t" + platinumi + "  |");
+                Console.WriteLine("|\t\t\t\t   |");
+                Console.WriteLine("|Descuento por combo:\t\t" + desc + "|");
+                Console.WriteLine("|Total sin descuento:\tQ" + subtotal + "       ");
+                Console.WriteLine("|\t\t\t\t   |");
+                Console.WriteLine("|Monto a pagar:\t\tQ" + total + "     ");
+                Console.WriteLine("------------------------------------");
+                Console.ReadKey();
+            }
+            //Factura con instalacion.
+            if (opcion_instalacion == 2)
+            {
+                Console.WriteLine("--------------FACTURA---------------");
+                Console.WriteLine("------------------------------------");
+                Console.WriteLine("|Cod.\t\t\t\t" + numeroAl + " |");
+                Console.WriteLine("|\t\t\t\t   |");
+                Console.WriteLine("|" + nombre + " " + apellido + "\t\t\t   |");
+                Console.WriteLine("|" + direccion + "\t   |");
+                Console.WriteLine("|\t\t\t\t   |");
+                Console.WriteLine("|***************PLAN***************|");
+                Console.WriteLine("|¬¬¬¬¬¬¬¬¬¬¬¬TELEFONIA¬¬¬¬¬¬¬¬¬¬¬¬¬|");
+                Console.WriteLine("|Bronce:\t\t\t" + broncet + "  |");
+                Console.WriteLine("|Oro:\t\t\t\t" + orot + "  |");
+                Console.WriteLine("|Platinum:\t\t\t" + platinumt + "  |");
+                Console.WriteLine("|\t\t\t\t   |");
+                Console.WriteLine("|¬¬¬¬¬¬¬¬¬¬¬¬¬¬CABLE¬¬¬¬¬¬¬¬¬¬¬¬¬¬¬|");
+                Console.WriteLine("|Bronce:\t\t\t" + broncec + "  |");
+                Console.WriteLine("|Oro:\t\t\t\t" + oroc + "  |");
+                Console.WriteLine("|Platinum:\t\t\t" + platinumc + "  |");
+                Console.WriteLine("|\t\t\t\t   |");
+                Console.WriteLine("|¬¬¬¬¬¬¬¬¬¬¬¬¬INTERNER¬¬¬¬¬¬¬¬¬¬¬¬¬|");
+                Console.WriteLine("|Bronce:\t\t\t" + broncei + "  |");
+                Console.WriteLine("|Oro:\t\t\t\t" + oroi + "  |");
+                Console.WriteLine("|Platinum:\t\t\t" + platinumi + "  |");
+                Console.WriteLine("|\t\t\t\t   |");
+                Console.WriteLine("|¬¬¬¬¬¬¬¬¬¬¬INSTALACION¬¬¬¬¬¬¬¬¬¬¬¬|");
+                Console.WriteLine("|Cobro de instalacion:\tQ100\t   |");
+                Console.WriteLine("|Cobro por equipo:\tQ150\t   |");
+                Console.WriteLine("|\t\t\t\t   |");
+                Console.WriteLine("|Descuento por combo:\t\t" + desc + "|");
+                Console.WriteLine("|Total sin descuento:\tQ" + subtotal + "       ");
+                Console.WriteLine("|\t\t\t\t   |");
+                Console.WriteLine("|Monto a pagar:\t\tQ" + total + "     ");
+                Console.WriteLine("------------------------------------");
+                Console.ReadKey();
+                Console.Clear();
+            }
+            Console.Clear();
+            Console.WriteLine("Igrese si/no");
+            Console.WriteLine("Desea realizar otra registro?");
+            respuesta = Console.ReadLine();
+            //convirtiendo la palabra a minusculas
+            minuscula = respuesta.ToLower();
+        } while(minuscula == "si");
+
+    }
+}
